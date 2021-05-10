@@ -58,8 +58,8 @@ class Rover:
         return self.__xpos, self.__ypos
 
     def _make_move(self, xmove: int, ymove: int):
-        new_xpos = (self.__xpos + xmove)
-        new_ypos = (self.__ypos + ymove)
+        new_xpos = (self.__xpos + xmove) % self.planet.width
+        new_ypos = (self.__ypos + ymove) % self.planet.height
         if self.planet.position_is_valid(new_xpos, new_ypos):
             self.__xpos, self.__ypos = new_xpos, new_ypos
         else:
