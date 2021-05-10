@@ -5,4 +5,4 @@ class Planet:
         self.height = height
 
     def position_is_valid(self, x: int, y: int) -> bool:
-        pass
+        return True

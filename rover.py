@@ -1,4 +1,5 @@
 import dataclasses
+from typing import Tuple
 
 from planet import Planet
 
@@ -47,6 +48,10 @@ class Rover:
     @property
     def direction(self) -> Direction:
         return COMPASS[self.__dir_index]
+
+    @property
+    def location(self) -> Tuple[int, int]:
+        return self.__xpos, self.__ypos
 
     def _make_move(self, xmove: int, ymove: int):
         new_xpos = self.__xpos + xmove
