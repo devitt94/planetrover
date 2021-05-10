@@ -8,7 +8,7 @@ class TestRover(unittest.TestCase):
 
     def setUp(self) -> None:
         planet = Planet(10, 10)
-        self.rover = Rover(planet, 0, 0, 0)
+        self.rover = Rover(planet, 5, 5, 0)
 
     def test_rotate_clockwise(self):
         for expected_direction in ("S", "W", "N", "E"):
@@ -22,27 +22,27 @@ class TestRover(unittest.TestCase):
 
     def test_move_forward(self):
         self.rover.move_forward()
-        self.assertEqual(self.rover.location, (1, 0))
+        self.assertEqual(self.rover.location, (6, 5))
 
         self.rover.rotate_clockwise()
         self.rover.move_forward()
-        self.assertEqual(self.rover.location, (1, -1))
+        self.assertEqual(self.rover.location, (6, 4))
 
         self.rover.rotate_anticlockwise()
         self.rover.move_forward()
-        self.assertEqual(self.rover.location, (2, -1))
+        self.assertEqual(self.rover.location, (7, 4))
 
     def test_move_backward(self):
         self.rover.move_backward()
-        self.assertEqual(self.rover.location, (-1, 0))
+        self.assertEqual(self.rover.location, (4, 5))
 
         self.rover.rotate_clockwise()
         self.rover.move_backward()
-        self.assertEqual(self.rover.location, (-1, 1))
+        self.assertEqual(self.rover.location, (4, 6))
 
         self.rover.rotate_anticlockwise()
         self.rover.move_backward()
-        self.assertEqual(self.rover.location, (-2, 1))
+        self.assertEqual(self.rover.location, (3, 6))
 
 
 unittest.main()
