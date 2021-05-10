@@ -63,7 +63,7 @@ class Rover:
         if self.planet.position_is_valid(new_xpos, new_ypos):
             self.__xpos, self.__ypos = new_xpos, new_ypos
         else:
-            print(f"Error: cannot move to {new_xpos, new_ypos}")
+            print(f"Error: cannot move to {new_xpos, new_ypos}. Hit an obstacle")
 
     def __str__(self):
         return f"Rover at x={self.__xpos} y={self.__ypos}, facing {self.direction.s}\n{self.planet}"
@@ -75,7 +75,14 @@ if __name__ == "__main__":
     while rover is None:
         try:
             width, height = map(int, input("Enter Planet width and height: ").split())
-            planet = Planet(width, height)
+            nobstacles = int(input("Enter number of planetary obstacles: "))
+
+            obstacles = []
+            for i in range(nobstacles):
+                obsx, obsy = map(int, input(f"Enter co-ordinates of obstacle {i+1}: ").split())
+                obstacles.append((obsx, obsy))
+
+            planet = Planet(width, height, obstacles)
 
             x, y, direction = input("Enter initial rover position e.g. '0 0 E': ").split()
             x, y = int(x), int(y)
