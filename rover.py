@@ -26,8 +26,10 @@ NDIRS = len(COMPASS)
 
 class Rover:
 
-    def __init__(self, planet: Planet, dir_index: int):
+    def __init__(self, planet: Planet, xpos: int, ypos: int, dir_index: int):
         self.planet = planet
+        self.__xpos = xpos
+        self.__ypos = ypos
         self.__dir_index = dir_index
 
     def rotate_clockwise(self):
@@ -37,8 +39,21 @@ class Rover:
         self.__dir_index = (self.__dir_index - 1) % NDIRS
 
     def move_forward(self):
-        pass
+        self._make_move(self.direction.x, self.direction.y)
 
     def move_backward(self):
-        pass
+        self._make_move(self.direction.x * -1, self.direction.y * -1)
+
+    @property
+    def direction(self) -> Direction:
+        return COMPASS[self.__dir_index]
+
+    def _make_move(self, xmove: int, ymove: int):
+        new_xpos = self.__xpos + xmove
+        new_ypos = self.__ypos + ymove
+        if self.planet.position_is_valid(new_xpos, new_ypos):
+            self.__xpos, self.__ypos = new_xpos, new_ypos
+        else:
+            print(f"Error: cannot move to {new_xpos, new_ypos}")
+
 
